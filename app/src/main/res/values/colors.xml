@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryDark">#478b2a</color>
+    <color name="colorAccent">#d9111e</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_alpha">#3e000000</color>
+    <color name="grey_alpha">#3eb3aeae</color>
+    <color name="appBarColorPrimary">#FFFFFF</color>
+    <color name="text_grey">#9e9e9e</color>
+
+    <color name="circle_blue">#1E90FF</color>
+    <color name="circle_pink">#FF1493</color>
+    <color name="circle_green">#32CD32</color>
+    <color name="circle_orange">#FF8C00</color>
+    <color name="circle_purple">#4B0082</color>
+
+
+    <color name="blue_alpha">#6e1e90ff</color>
+    <color name="green_alpha">#6e32cd32</color>
+    <color name="orange_alpha">#6eff8c00</color>
+    <color name="pink_alpha">#6eff1493</color>
+    <color name="purple_alpha">#6e4b0082</color>
+    <color name="white_alpha">#e0ffffff</color>
+    <color name="text_ligth_grey">#808080</color>
+
+
+
+
+    <color name="Green_A400">#1DE9B6</color>
+
+
+
+
+</resources>

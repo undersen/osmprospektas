@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_add_polygon"
+            android:icon="@drawable/ic_add_black_36dp"
+            android:title="Add Polygon" />
+        <item
+            android:id="@+id/nav_add_prospektum_image"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Add propektum Image" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Slideshow" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_add_location_black_36dp"
+            android:title="Add geopoint from form" />
+        <item
+            android:id="@+id/nav_overlay"
+            android:icon="@drawable/ic_add_location_black_36dp"
+            android:title="Add Overlay" />
+    </group>
+
+    <item android:title="KML">
+        <menu>
+            <item
+                android:id="@+id/nav_show_kml"
+                android:icon="@drawable/ic_public_black_48dp"
+                android:title="Kml " />
+            <item
+                android:id="@+id/nav_kml_file"
+                android:icon="@drawable/ic_attach_file_black_48dp"
+                android:title="Search for KML File" />
+            <item
+                android:id="@+id/nav_kml_url"
+                android:icon="@drawable/ic_cloud_download_black_48dp"
+                android:title="Download KML" />
+        </menu>
+    </item>
+
+</menu>
