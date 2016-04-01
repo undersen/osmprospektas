@@ -35,7 +35,7 @@ public class SplashScreenActivity extends Activity {
             try{
 
                 final AccountManager accountManager = AccountManager.get(getApplicationContext());
-                final Account[] accounts = accountManager.getAccountsByType("prospektas.prospektas");
+                final Account[] accounts = accountManager.getAccountsByType("com.example.android.osmdroidofflinedemo");
                 Account account = accounts[0];
                 Intent intent = new Intent(getApplicationContext(), ProspektumActivity.class);
                 startActivity(intent);

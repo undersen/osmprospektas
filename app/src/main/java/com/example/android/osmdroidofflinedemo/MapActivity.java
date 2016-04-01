@@ -88,6 +88,7 @@ public class MapActivity extends AppCompatActivity
     private List<File> files;
     private List<ProspektumKmlFile> prospektumKmlFiles = new ArrayList<>() ;
     RecyclerView recyclerViewFiles;
+    List<FolderOverlay> folderOverlayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -609,9 +610,9 @@ public class MapActivity extends AppCompatActivity
     }
 
     public void loadKmlFromAdapter() {
+    mapView.getOverlays().removeAll(folderOverlayList);
 
-
-        List<FolderOverlay> folderOverlayList = new ArrayList<>();
+        folderOverlayList = new ArrayList<>();
 
         for(int i =0;i<=prospektumKmlFiles.size()-1;i++)
         {
