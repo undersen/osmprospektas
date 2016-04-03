@@ -86,7 +86,7 @@ public class MapActivity extends AppCompatActivity
     private DrawerLayout drawer;
     NavigationView navigationView;
     private List<File> files;
-    private List<ProspektumKmlFile> prospektumKmlFiles = new ArrayList<>() ;
+    private List<ProspektumKmlFile> prospektumKmlFiles;
     RecyclerView recyclerViewFiles;
 
     @Override
@@ -126,13 +126,29 @@ public class MapActivity extends AppCompatActivity
 
 
         //TODO : make it Async
-        getKmlFiles();
+        loadKMLFiles();
 
     }
 
     private void LoadKmlAlertDialog(View view) {
     }
 
+    private void loadKMLFiles() {
+        files = getListFiles(new File(String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))));
+
+        for( int i =0;i<= files.size()-1;i++)
+        {
+            ProspektumKmlFile prospektumKmlFile= new ProspektumKmlFile();
+
+            String [] ext = files.get(i).getName().split("\\.");
+
+            prospektumKmlFile.setName(files.get(i).getName());
+            prospektumKmlFile.setPath(files.get(i).getPath());
+            prospektumKmlFile.setPath(ext[1]);
+            prospektumKmlFile.setIsLoaded(false);
+
+        }
+    }
 
     private List<File> getListFiles(File parentDir) {
         ArrayList<File> inFiles = new ArrayList<File>();
@@ -287,7 +303,7 @@ public class MapActivity extends AppCompatActivity
             recyclerViewFiles = (RecyclerView) view.findViewById(R.id.recycler_view_all_kml_files);
             recyclerViewFiles.setLayoutManager(new LinearLayoutManager(this));
             LoadKmlAlertDialog(view);
-            KmlViewAdapter adapter = new KmlViewAdapter(prospektumKmlFiles, MapActivity.this);
+            KmlViewAdapter adapter = new KmlViewAdapter(files, MapActivity.this);
             recyclerViewFiles.setAdapter(adapter);
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
@@ -608,56 +624,22 @@ public class MapActivity extends AppCompatActivity
         mapView.invalidate();
     }
 
-    public void loadKmlFromAdapter() {
+    public void loadKmlFromRoute(String fileName) {
 
+        KmlDocument kmlDocument = new KmlDocument();
 
-        List<FolderOverlay> folderOverlayList = new ArrayList<>();
+        File file = new File(String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/"+fileName));
 
-        for(int i =0;i<=prospektumKmlFiles.size()-1;i++)
-        {
-            KmlDocument kmlDocument = new KmlDocument();
-            if (prospektumKmlFiles.get(i).isLoaded())
-            {
-
-                File  file = new File(prospektumKmlFiles.get(i).getPath());
-
-                if (prospektumKmlFiles.get(i).getName().endsWith(".kml")) {
-                    kmlDocument.parseKMLFile(file);
-                } else {
-                    kmlDocument.parseKMZFile(file);
-            }
-
-                FolderOverlay folderOverlay = new FolderOverlay(context);
-                folderOverlay = (FolderOverlay) kmlDocument.mKmlRoot.buildOverlay(mapView,null,null,kmlDocument);
-                folderOverlayList.add(folderOverlay);
-            }
-
-            mapView.getOverlays().addAll(folderOverlayList);
-            mapView.invalidate();
-        }
-    }
-
-
-    private void getKmlFiles() {
-        files = getListFiles(new File(String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))));
-
-        for(int i =0;i<=files.size()-1;i++)
-        {
-
-            String [] extension =files.get(i).getName().split("\\.");
-            ProspektumKmlFile prospektumKmlFile = new ProspektumKmlFile();
-            prospektumKmlFile.setName(files.get(i).getName());
-            prospektumKmlFile.setPath(files.get(i).getAbsolutePath());
-            prospektumKmlFile.setExtension(extension[1]);
-            prospektumKmlFile.setIsLoaded(false);
-
-            prospektumKmlFiles.add(prospektumKmlFile);
+        if (file.getName().endsWith(".kml")) {
+            kmlDocument.parseKMLFile(file.getAbsoluteFile());
+        } else {
+            kmlDocument.parseKMZFile(file.getAbsoluteFile());
         }
 
-
-
+        FolderOverlay overlay = new FolderOverlay(context);
+        overlay = (FolderOverlay) kmlDocument.mKmlRoot.buildOverlay(mapView, null, null, kmlDocument);
+        mapView.getOverlays().add(overlay);
+        mapView.invalidate();
+        Log.d(TAG,"paso por aqui");
     }
-
-
-
 }

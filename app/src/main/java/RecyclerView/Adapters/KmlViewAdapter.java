@@ -3,7 +3,6 @@ package RecyclerView.Adapters;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ public class KmlViewAdapter extends RecyclerView.Adapter<KmlViewHolder> {
 
     private List<ProspektumKmlFile> files;
     private Activity activity;
-    private static String TAG = KmlViewAdapter.class.getSimpleName();
 
     public KmlViewAdapter(List<ProspektumKmlFile> files, Activity activity) {
         this.files = files;
@@ -44,25 +42,20 @@ public class KmlViewAdapter extends RecyclerView.Adapter<KmlViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(KmlViewHolder holder, final int position) {
+    public void onBindViewHolder(KmlViewHolder holder, int position) {
         final ProspektumKmlFile file =  files.get(position);
         holder.textView_name.setText(file.getName());
         holder.aSwitch.setChecked(file.isLoaded());
         holder.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
+                if(isChecked)
+                {
                     MapActivity mapActivity = (MapActivity) activity;
-                    mapActivity.loadKmlFromAdapter();
-                    file.setIsLoaded(true);
-                    Log.d(TAG,"Enabled ");
+                    mapActivity.loadKmlFromRoute(file.getName());
 
-                } else {
-
-                    MapActivity mapActivity = (MapActivity) activity;
-                    mapActivity.loadKmlFromAdapter();
-                    file.setIsLoaded(false);
-                    Log.d(TAG,"Disabled ");
+                }else
+                {
 
                 }
             }
