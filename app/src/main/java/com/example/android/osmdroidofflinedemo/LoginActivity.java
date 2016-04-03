@@ -239,9 +239,13 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Loade
                         Log.d(TAG, "#Api call success : " + response.message());
 
 
-                        String authToken = response.body().getAuthentication_token();
+                        //Log.d(TAG, "#Api call success : " + response.body().getAuthentication_token());
 
-                        Account prospektasAccount = new Account(mEmail, "com.example.android.osmdroidofflinedemo");
+
+
+
+                        String authToken = response.body().getAuthentication_token();
+                        Account prospektasAccount = new Account(mEmail, "prospektas.prospektas");
                         mAccountManager.addAccountExplicitly(prospektasAccount, authToken, null);
                         mAccountManager.setAuthToken(prospektasAccount, AccountManager.KEY_AUTHTOKEN, authToken);
 

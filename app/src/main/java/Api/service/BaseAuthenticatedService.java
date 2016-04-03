@@ -14,7 +14,7 @@ import Api.ServiceGenerator;
  * Created by UnderSen on 26-01-16.
  */
 public abstract class BaseAuthenticatedService <ResponseType> {
-    private static final String ACCOUNT_TYPE = "com.example.android.osmdroidofflinedemo";
+    private static final String ACCOUNT_TYPE = "prospektas.prospektas";
     private Context mcontext;
 
     public ProspektasAPI getmApiService() {
@@ -36,7 +36,7 @@ public abstract class BaseAuthenticatedService <ResponseType> {
         try{
 
             final AccountManager accountManager = AccountManager.get(mcontext);
-            final Account[] accounts = accountManager.getAccountsByType("com.example.android.osmdroidofflinedemo");
+            final Account[] accounts = accountManager.getAccountsByType("prospektas.prospektas");
             Account account = accounts[0];
 
             AccountManagerFuture<Bundle> acc = accountManager.getAuthToken(account, ACCOUNT_TYPE, false, null, null);
